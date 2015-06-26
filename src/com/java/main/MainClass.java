@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.java.encrypt.Encrypt;
 import com.java.utility.SourceFileReader;
 
 /**
@@ -20,52 +21,53 @@ import com.java.utility.SourceFileReader;
  * @file name - MainClass.java
  */
 public class MainClass {
-	
+
 	private static BufferedImage scrImage;
-	private static BufferedImage scrImage2;
+	private static BufferedImage ecrImage;
 	private static File srcImageFile;
 	private static File txtFile;
+	private static File lengthFile;
 	private static int[] rgbArray;
 	private static FileInputStream _readFileInputStream;
-	private static byte[] buffer = new byte[1];
-	
-	public static void main(String[] args) {
-		try {
-			txtFile = new File(SourceFileReader.convertToBinary("C:\\Users\\rahul.rathore\\Desktop\\TestFile.txt"));
-			_readFileInputStream = new FileInputStream(txtFile);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		srcImageFile = new File("C:\\Users\\rahul.rathore\\Desktop\\Capture.bmp");
-		int index = 0;
-		try {
-			scrImage = ImageIO.read(srcImageFile);
-			rgbArray = new int[scrImage.getHeight() * scrImage.getWidth()];
-			rgbArray = scrImage.getRGB(0, 0, scrImage.getWidth(),scrImage.getHeight(),  rgbArray, 0, scrImage.getWidth());
-			while(_readFileInputStream.read(buffer) != -1){
-				int a = ((rgbArray[index] >> 24) & 0x000000ff);
-				int r = ((rgbArray[index] >> 16) & 0x000000ff);
-				int g = ((rgbArray[index] >> 8) & 0x000000ff);
-				int b = ((rgbArray[index] ) & 0x000000fe);
-				System.out.println(b);
-				if((buffer[0] - 48) == 0)
-					b = ( b |(0x00000000));
-				else
-					b = (b | (0x00000001));
-				
-				System.out.println("-" + b);
-				rgbArray[index] = ( a << 24) | (r << 16) | ( g << 8) | b;
-				index++;
-				
-			}
-			scrImage2 = new BufferedImage(scrImage.getWidth(), scrImage.getHeight(), scrImage.getType());
-			scrImage2.setRGB(0, 0, scrImage.getWidth(),scrImage.getHeight(), rgbArray, 0, scrImage.getWidth());
-			System.out.println(ImageIO.write(scrImage2, "bmp", new File("t.bmp")));
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	private static FileInputStream _lengthFileInputStream;
+	private static String pixelCount;
+	private static String fileName;
+	private static final String Image_TYPE = "bmp";
 
+	public static void main(String[] args) throws IOException {
+
+		txtFile = new File(
+				SourceFileReader
+						.convertToBinary("C:\\Users\\rahul.rathore\\Desktop\\TestFile.txt"));
+		lengthFile = new File("length.txt");
+		pixelCount = SourceFileReader
+				.appendZero(((int) lengthFile.length()) + "");
+
+		_lengthFileInputStream = new FileInputStream(lengthFile);
+		_readFileInputStream = new FileInputStream(txtFile);
+
+		srcImageFile = new File(
+				"C:\\Users\\rahul.rathore\\Desktop\\Capture.bmp");
+		
+		fileName = srcImageFile.getName();
+
+		scrImage = ImageIO.read(srcImageFile);
+
+		rgbArray = new int[scrImage.getHeight() * scrImage.getWidth()];
+		rgbArray = scrImage.getRGB(0, 0, scrImage.getWidth(),
+				scrImage.getHeight(), rgbArray, 0, scrImage.getWidth());
+
+		rgbArray = Encrypt.hideCountPixel(rgbArray, pixelCount);
+		rgbArray = Encrypt.hideData(rgbArray, _lengthFileInputStream);
+		rgbArray = Encrypt.hideData(rgbArray, _readFileInputStream);
+
+		ecrImage = new BufferedImage(scrImage.getWidth(), scrImage.getHeight(),
+				scrImage.getType());
+		ecrImage.setRGB(0, 0, scrImage.getWidth(), scrImage.getHeight(),
+				rgbArray, 0, scrImage.getWidth());
+		
+		ImageIO.write(ecrImage, Image_TYPE, new File(SourceFileReader.getFileName(fileName)));
+		System.out.println("Done");
 	}
 
 }

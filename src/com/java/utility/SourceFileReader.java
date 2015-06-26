@@ -8,6 +8,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -33,26 +36,45 @@ public class SourceFileReader {
 		
 		return buffer;
 	}
-	private static String getBinary(byte aValue) {
-		String binaryValue = Integer.toBinaryString(aValue);
-		int totalZero = 8 - binaryValue.length();
+	
+	public static String appendZero(String binaryValue) {
+		int totalZero = 0;
+		
+		if(binaryValue.length() < 8)
+			totalZero = 8 - binaryValue.length();
+		else if((binaryValue.length() > 8) && (binaryValue.length() < 16))
+			totalZero = 16 - binaryValue.length();
+		else
+			totalZero = 24 - binaryValue.length();
+		
 		for(int i = 0; i < totalZero; i++)
 			binaryValue = "0" + binaryValue;
+		
 		return binaryValue;
+	}
+	
+	private static String getBinary(byte aValue) {
+		String binaryValue = Integer.toBinaryString(aValue);
+		return appendZero(binaryValue);
 	}
 	
 	private static void writeLengthToFile(int length) throws IOException {
 		String binaryValue = Integer.toBinaryString(length);
 		
-		int totalZero = 8 - binaryValue.length();
-		for(int i = 0; i < totalZero; i++)
-			binaryValue = "0" + binaryValue;
+		binaryValue = appendZero(binaryValue);
 		
 		lenFile = new File("length.txt");
 		writeFile = new BufferedWriter(new FileWriter(lenFile));
 		writeFile.write(binaryValue);
 		writeFile.close();
 		
+	}
+	
+	public static String getFileName(String aFileName) {
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat date = new SimpleDateFormat("dd-MM-YYYY-HH-mm");
+		aFileName = aFileName + "-" + date.format(cal.getTime()) + ".bmp";
+		return aFileName;
 	}
 	
 	public static String convertToBinary(String fileName) throws IOException {

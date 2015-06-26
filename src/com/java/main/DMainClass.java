@@ -32,7 +32,7 @@ public class DMainClass {
 	private static FileOutputStream _writeFile;
 	
 	public static void main(String[] args) {
-		srcImageFile = new File("t.bmp");
+		srcImageFile = new File("Capture.bmp-26-06-2015-23-19.bmp");
 		int index = 0;
 		try {
 			scrImage = ImageIO.read(srcImageFile);
