@@ -9,10 +9,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.naming.directory.InvalidAttributeValueException;
 
 import com.java.cryptoutils.DecryptUtil;
 import com.java.utility.DecryptMessage;
+import com.java.utility.FileType;
 
 
 public class DecryptMainClass {
@@ -28,7 +28,7 @@ public class DecryptMainClass {
 		try {
 			
 			srcImageFile = new File(aImgPath);
-			binaryData = new File("d.txt");
+			binaryData = new File(FileType.DEC_TEMP_FILE);
 
 			scrImage = ImageIO.read(srcImageFile);
 			rgbArray = new int[scrImage.getHeight() * scrImage.getWidth()];
@@ -68,7 +68,8 @@ public class DecryptMainClass {
 			}
 		}
 	}
-	public static void main(String[] args) {
+	
+	/*public static void main(String[] args) {
 		System.out.println(DecryptDataFromImg("Capture.bmp-27-06-2015-21-19.bmp"));
-	}
+	}*/
 }

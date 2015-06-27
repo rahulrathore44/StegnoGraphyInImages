@@ -25,7 +25,6 @@ public class EncryptMainClass {
 	private static FileInputStream _lengthFileInputStream;
 	private static String pixelCount;
 	private static String fileName;
-	private static final String Image_TYPE = "bmp";
 	private static int[] rgbArray;
 	
 	
@@ -33,7 +32,7 @@ public class EncryptMainClass {
 		try {
 
 			txtFile = new File(SourceFileReader.convertToBinary(aMsgFile));
-			lengthFile = new File("length.txt");
+			lengthFile = new File(FileType.ENC_LENGTH_FILE);
 			pixelCount = SourceFileReader.appendZero(Integer.toBinaryString((int) lengthFile.length()));
 
 			_lengthFileInputStream = new FileInputStream(lengthFile);
@@ -59,7 +58,7 @@ public class EncryptMainClass {
 				// logger.WARN();
 			}
 			
-			return ImageIO.write(ecrImage, Image_TYPE, new File(SourceFileReader.getFileName(fileName,FileType.BMP)));
+			return ImageIO.write(ecrImage, FileType.Image_TYPE, new File(SourceFileReader.getFileName(fileName,FileType.BMP)));
 		
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -81,8 +80,9 @@ public class EncryptMainClass {
 			}
 		}
 	}
-	public static void main(String[] args) {
+	
+	/*public static void main(String[] args) {
 		System.out.println(EncryptDataToImage("C:\\Users\\rahul.rathore\\Desktop\\TestFile.txt","C:\\Users\\rahul.rathore\\Desktop\\Capture.bmp"));
-	}
+	}*/
 }
 

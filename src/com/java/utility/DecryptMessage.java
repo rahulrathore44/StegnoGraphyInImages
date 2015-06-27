@@ -18,7 +18,6 @@ public class DecryptMessage {
 	private static FileInputStream srcInputStream;
 	private static BufferedWriter msgWriter;
 	private static String message = "";
-	private static final String FILE_NAME = "Message";
 	private static byte buffer[] = new byte[8];
 	
 
@@ -37,7 +36,7 @@ public class DecryptMessage {
 					message =  message + (new Character((char)charCode)).toString();
 				}
 				
-				msgWriter = new BufferedWriter(new FileWriter(new File(SourceFileReader.getFileName(FILE_NAME,FileType.TEXT))));
+				msgWriter = new BufferedWriter(new FileWriter(new File(SourceFileReader.getFileName(FileType.FILE_NAME,FileType.TEXT))));
 				msgWriter.write(message);
 				
 				if(!EncryptUtil.cleanFile(srcFile)){

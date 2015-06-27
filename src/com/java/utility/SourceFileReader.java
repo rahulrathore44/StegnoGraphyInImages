@@ -55,7 +55,7 @@ public class SourceFileReader {
 		
 		binaryValue = appendZero(binaryValue);
 		
-		lenFile = new File("length.txt");
+		lenFile = new File(FileType.ENC_LENGTH_FILE);
 		writeFile = new BufferedWriter(new FileWriter(lenFile));
 		writeFile.write(binaryValue);
 		writeFile.close();
@@ -72,7 +72,7 @@ public class SourceFileReader {
 	public static String convertToBinary(String fileName) throws IOException {
 		
 		srcFile = new File(fileName);
-		tempFile = new File("temp.txt");
+		tempFile = new File(FileType.ENC_TEMP_FILE);
 		writeLengthToFile((int)srcFile.length());
 		
 		if((int)srcFile.length() > bufSize)
