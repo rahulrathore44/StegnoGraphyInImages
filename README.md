@@ -5,7 +5,7 @@ Steganography is the practice of concealing a file, message, image, or video wit
 
 # REQUIREMENTS
 
-* JDK 1.7 
+	* JDK 1.7 
 
 # COMMAND LINE
 
