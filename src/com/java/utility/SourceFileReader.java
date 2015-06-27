@@ -12,13 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
-/**
- * @author - rahul.rathore
- * @date - 26-May-2015
- * @project - StegnoGraphy
- * @package - com.java.utility
- * @file name - SourceFileReader.java
- */
 public class SourceFileReader {
 	
 	private static File srcFile;
@@ -69,10 +62,10 @@ public class SourceFileReader {
 		
 	}
 	
-	public static String getFileName(String aFileName) {
+	public static String getFileName(String aFileName,String bType) {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat date = new SimpleDateFormat("dd-MM-YYYY-HH-mm");
-		aFileName = aFileName + "-" + date.format(cal.getTime()) + ".bmp";
+		aFileName = aFileName + "-" + date.format(cal.getTime()) + bType;
 		return aFileName;
 	}
 	

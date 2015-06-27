@@ -1,16 +1,10 @@
 /**
  * 
  */
-package com.java.encrypt;
+package com.java.cryptoutils;
 
-/**
- * @author - rahul.rathore
- * @date - 26-Jun-2015
- * @project - StegnoGraphy
- * @package - com.java.encrypt
- * @file name - Dcrypt.java
- */
-public class Dcrypt {
+
+public class DecryptUtil {
 	
 	public static int convertToIntFromBinary(String aBinaryValue) {
 		int value = 0;

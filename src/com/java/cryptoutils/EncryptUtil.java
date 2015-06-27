@@ -1,19 +1,14 @@
 /**
  * 
  */
-package com.java.encrypt;
+package com.java.cryptoutils;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-/**
- * @author - rahul.rathore
- * @date - 26-Jun-2015
- * @project - StegnoGraphy
- * @package - com.java.encrypt
- * @file name - Encrypt.java
- */
-public class Encrypt {
+
+public class EncryptUtil {
 	
 	private static byte buffer[] = new byte[1];
 	private static int index = 8;
@@ -38,6 +33,17 @@ public class Encrypt {
 			index++;
 		}
 		return rgb;
+	}
+	
+	public static boolean cleanFile(File aFile) {
+		try {
+				if(aFile.exists())
+					aFile.deleteOnExit();
+				return true;
+		} catch (Exception e) {
+			return false;
+		}
+		
 	}
 
 }
