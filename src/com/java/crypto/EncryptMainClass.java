@@ -29,7 +29,7 @@ public class EncryptMainClass {
 	private static int[] rgbArray;
 	
 	
-	public static boolean EncryptDataToImage(String aMsgFile,String bImgFile) {
+	public static boolean EncryptDataToImage(String bImgFile,String aMsgFile) {
 		try {
 
 			txtFile = new File(SourceFileReader.convertToBinary(aMsgFile));

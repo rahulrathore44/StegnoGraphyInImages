@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.naming.directory.InvalidAttributeValueException;
 
 import com.java.cryptoutils.DecryptUtil;
 import com.java.utility.DecryptMessage;
@@ -25,6 +26,7 @@ public class DecryptMainClass {
 	
 	public static boolean DecryptDataFromImg(String aImgPath) {
 		try {
+			
 			srcImageFile = new File(aImgPath);
 			binaryData = new File("d.txt");
 
