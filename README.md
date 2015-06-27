@@ -2,16 +2,16 @@
 Steganography is the practice of concealing a file, message, image, or video within another file, message, image, or video. The word steganography combines the Greek words steganos, meaning "covered, concealed, or protected", and graphein meaning "writing!"
 
 
-# DESCRIPTION:
+# DESCRIPTION
 
 Steganography is the practice of concealing a file, message, image, or video within another file, message, image, or video. The word steganography combines the Greek words steganos, meaning "covered, concealed, or protected", and graphein meaning "writing!"
 
 
-# REQUIREMENTS:
+# REQUIREMENTS
 
 * JDK 1.7 
 
-# INVOKE THROUGH COMMAND LINE:
+# COMMAND LINE
 
 Encryption
  
@@ -21,7 +21,7 @@ Decryption
 
 	* java -jar BMPStegano.1.0.0.jar "<Encrypted Bmp Image Path>"
 	
-# IMPORTING AS JAR	
+# IMPORT JAR	
 
 Encryption
  
