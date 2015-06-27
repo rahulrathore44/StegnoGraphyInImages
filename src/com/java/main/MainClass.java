@@ -41,7 +41,7 @@ public class MainClass {
 						.convertToBinary("C:\\Users\\rahul.rathore\\Desktop\\TestFile.txt"));
 		lengthFile = new File("length.txt");
 		pixelCount = SourceFileReader
-				.appendZero(((int) lengthFile.length()) + "");
+				.appendZero(Integer.toBinaryString((int) lengthFile.length()));
 
 		_lengthFileInputStream = new FileInputStream(lengthFile);
 		_readFileInputStream = new FileInputStream(txtFile);
